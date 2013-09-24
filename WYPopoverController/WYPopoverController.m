@@ -1302,9 +1302,12 @@ static CGFloat edgeSizeFromCornerRadius(CGFloat cornerRadius) {
 {
     UIWindow *result = [[UIApplication sharedApplication] keyWindow];
     
-    if (result.subviews.count > 0)
+    if (result.rootViewController)
     {
-        result = [result.subviews lastObject];
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wincompatible-pointer-types"
+        result = result.rootViewController.view;
+#pragma clang diagnostic pop
     }
 
     return result;
